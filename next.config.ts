@@ -2,9 +2,15 @@ import type { NextConfig } from "next";
 import path from "node:path";
 
 const nextConfig: NextConfig = {
-  // Use webpack for production builds (shared hosting often symlinks node_modules;
-  // Turbopack fails with "Symlink node_modules is invalid" on Linux panels).
+  // FastComet/CloudLinux limits processes — default Next.js spawns many workers.
+  experimental: {
+    workerThreads: false,
+    cpus: 1,
+  },
+
+  // Webpack build (avoids Turbopack symlink issues on shared hosting).
   webpack: (config) => {
+    config.parallelism = 1;
     config.resolve.alias = {
       ...config.resolve.alias,
       "@": path.resolve(process.cwd()),
