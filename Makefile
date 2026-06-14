@@ -2,22 +2,32 @@
 #
 # Setup (once):
 #   cp .env.deploy.example .env.deploy
-#   Edit SSH_TARGET in .env.deploy (your FastComet SSH login)
+#   make check-ssh    # expect: SSH OK — s11748.sgp1.stableserver.net
 #
 # Full deploy:
 #   make deploy MSG="Describe your change"
 #
 # Deploy without git (tar only, code already pushed):
 #   make deploy-fast
+#
+# See DEPLOY-FASTCOMET.md for SSH troubleshooting and FastComet account details.
+
+# Defaults (overridden by .env.deploy when present)
+SSH_USER      ?= oxydatam
+SSH_HOST      ?= s11748.sgp1.stableserver.net
+SSH_PORT      ?= 22
 
 -include .env.deploy
 
-SSH_TARGET    ?= oxydatam@s11748
+ifndef SSH_TARGET
+SSH_TARGET    := $(SSH_USER)@$(SSH_HOST)
+endif
+SSH_OPTS      := -p $(SSH_PORT) -o ConnectTimeout=15
+SCP_OPTS      := -P $(SSH_PORT) -o ConnectTimeout=15
 REMOTE_APP    ?= /home/oxydatam/aigateway
 REMOTE_TAR    ?= /home/oxydatam/aigateway-build.tar.gz
 TAR_FILE      ?= aigateway-build.tar.gz
 GIT_BRANCH    ?= main
-NODE_VENV     ?= /home/oxydatam/nodevenv/aigateway/22/bin/activate
 
 .PHONY: help build-tar git-push upload remote-deploy deploy deploy-fast check-ssh
 
@@ -25,22 +35,23 @@ help:
 	@echo "AI Gateway — FastComet deploy"
 	@echo ""
 	@echo "Setup:"
-	@echo "  cp .env.deploy.example .env.deploy   # set SSH_TARGET"
+	@echo "  cp .env.deploy.example .env.deploy"
+	@echo "  make check-ssh          # port 22 on account oxydatam"
 	@echo ""
 	@echo "Targets:"
 	@echo "  make deploy MSG=\"...\"   Git commit+push, build tar, upload, extract on server"
 	@echo "  make deploy-fast        Build tar, upload, extract (skip git)"
 	@echo "  make build-tar          Production build + $(TAR_FILE)"
 	@echo "  make git-push MSG=\"...\" Commit and push to GitHub"
-	@echo "  make upload             SCP $(TAR_FILE) to FastComet"
-	@echo "  make remote-deploy      git pull + extract .next on server"
+	@echo "  make upload             Build + SCP $(TAR_FILE) to FastComet"
+	@echo "  make remote-deploy      Git reset + extract .next on server (tar must exist)"
 	@echo "  make check-ssh          Test SSH connection"
 	@echo ""
-	@echo "After deploy: cPanel → Node.js App → RESTART"
+	@echo "After deploy: cPanel → Node.js App → RESTART → https://aigateway.my"
 
 check-ssh:
-	@echo "Testing SSH to $(SSH_TARGET)..."
-	ssh -o ConnectTimeout=10 $(SSH_TARGET) 'echo "SSH OK — $$(hostname)"'
+	@echo "Testing SSH to $(SSH_TARGET) (port $(SSH_PORT))..."
+	ssh $(SSH_OPTS) $(SSH_TARGET) 'echo "SSH OK — $$(hostname)"'
 
 build-tar:
 	@echo "Stopping dev server..."
@@ -67,11 +78,11 @@ endif
 
 upload: build-tar
 	@echo "Uploading $(TAR_FILE) → $(SSH_TARGET):$(REMOTE_TAR)"
-	scp $(TAR_FILE) $(SSH_TARGET):$(REMOTE_TAR)
+	scp $(SCP_OPTS) $(TAR_FILE) $(SSH_TARGET):$(REMOTE_TAR)
 
 remote-deploy:
 	@echo "Deploying on $(SSH_TARGET)..."
-	ssh $(SSH_TARGET) 'bash -s' < scripts/deploy-remote.sh
+	ssh $(SSH_OPTS) $(SSH_TARGET) 'bash -s' < scripts/deploy-remote.sh
 
 deploy: git-push upload remote-deploy
 	@echo ""
@@ -86,4 +97,5 @@ deploy-fast: upload remote-deploy
 	@echo "=========================================="
 	@echo " Deploy complete (no git push)."
 	@echo " Last step: cPanel → Node.js App → RESTART"
+	@echo " Then open: https://aigateway.my"
 	@echo "=========================================="
