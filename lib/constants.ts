@@ -89,12 +89,6 @@ export const SERVICES = [
     icon: "analytics",
   },
   {
-    title: "Analytics & Intelligence",
-    description:
-      "Executive and operational dashboards, production and reliability KPIs, predictive models and performance monitoring.",
-    icon: "operations-dashboard",
-  },
-  {
     title: "Managed Services",
     description:
       "Application support, platform monitoring, model lifecycle management and continuous improvement of deployed solutions.",
