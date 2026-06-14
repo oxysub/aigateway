@@ -60,6 +60,9 @@ export async function POST(request: Request) {
         user: smtpUser,
         pass: smtpPass,
       },
+      tls: {
+        rejectUnauthorized: false,
+      },
     });
 
     const subject = `AI Gateway enquiry from ${name}`;

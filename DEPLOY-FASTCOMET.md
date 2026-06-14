@@ -381,19 +381,27 @@ which npm
 
 ---
 
-## Contact form (optional)
+## Contact form
 
 Add in **cPanel → Node.js App → Environment variables**:
 
-| Variable | Example |
-|----------|---------|
-| `SMTP_HOST` | your mail server |
-| `SMTP_PORT` | `587` |
-| `SMTP_USER` | mailbox user |
-| `SMTP_PASS` | mailbox password |
-| `CONTACT_TO` | `subra@aigateway.my` |
+| Variable | Value | Notes |
+|----------|--------|--------|
+| `SMTP_HOST` | `mail.oxydata.my` | From cPanel → Email → Connect Devices |
+| `SMTP_PORT` | `587` | TLS |
+| `SMTP_USER` | `subra@oxydata.my` | **Real mailbox** — forwarders cannot send SMTP |
+| `SMTP_PASS` | mailbox password | Password for `subra@oxydata.my` |
+| `CONTACT_TO` | `subra@aigateway.my` | Enquiries go here → forwards to `subra@oxydata.my` |
+
+**How it works:** The app authenticates with the real mailbox (`subra@oxydata.my`) and sends enquiries **to** `subra@aigateway.my`. Your cPanel forwarder delivers them to `subra@oxydata.my`.
 
 Restart the app after changing env vars.
+
+| Error | Cause | Fix |
+|-------|--------|-----|
+| Email service is not configured | Missing env vars on server | Add `SMTP_*` in cPanel Node.js app |
+| Failed to send message | Wrong SMTP user/password | Use `subra@oxydata.my` (not forwarder address) for `SMTP_USER` |
+| 535 Incorrect authentication | Forwarder used as SMTP_USER | Forwarders have no password — use real mailbox |
 
 ---
 
