@@ -23,6 +23,7 @@ export const metadata: Metadata = {
     "oil and gas contractors",
     "AI engineers Malaysia",
   ],
+  alternates: { canonical: "/staff-augmentation" },
   openGraph: {
     title: "Workforce & Staff Augmentation | AI Gateway",
     description:

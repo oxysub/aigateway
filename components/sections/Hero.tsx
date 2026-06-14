@@ -9,7 +9,7 @@ export function Hero() {
       title={
         <>
           Enterprise AI, IoT and Data Intelligence for{" "}
-          <span className="text-accent">Oil &amp; Gas Operations</span>
+          <span className="text-accent">Safer, Smarter Operations</span>
         </>
       }
       description={COMPANY.subheadline}

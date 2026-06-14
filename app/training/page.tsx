@@ -16,6 +16,7 @@ export const metadata: Metadata = {
     "GenAI training",
     "HRD Corp claimable",
   ],
+  alternates: { canonical: "/training" },
   openGraph: {
     title: "AI Training | AI Gateway",
     description:

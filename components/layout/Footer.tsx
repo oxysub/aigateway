@@ -35,8 +35,12 @@ export function Footer() {
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="text-sm text-gray-600 transition-colors hover:text-gray-900"
+                    className="inline-flex items-center gap-2 text-sm text-gray-600 transition-colors hover:text-gray-900"
                   >
+                    <span
+                      aria-hidden
+                      className="h-0 w-0 shrink-0 border-y-[4px] border-l-[6px] border-y-transparent border-l-accent"
+                    />
                     {link.label}
                   </Link>
                 </li>
@@ -53,8 +57,12 @@ export function Footer() {
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="text-sm text-gray-600 transition-colors hover:text-gray-900"
+                    className="inline-flex items-center gap-2 text-sm text-gray-600 transition-colors hover:text-gray-900"
                   >
+                    <span
+                      aria-hidden
+                      className="h-0 w-0 shrink-0 border-y-[4px] border-l-[6px] border-y-transparent border-l-accent"
+                    />
                     {link.label}
                   </Link>
                 </li>
@@ -66,18 +74,20 @@ export function Footer() {
             <h3 className="mb-4 text-xs font-semibold uppercase tracking-wider text-gray-500">
               Contact
             </h3>
-            <address className="space-y-3 not-italic">
+            <address className="not-italic">
               <p className="text-sm font-medium text-gray-900">
                 {COMPANY.legalName}
               </p>
-              {COMPANY.address.map((line) => (
-                <p key={line} className="text-sm leading-relaxed text-gray-600">
-                  {line}
-                </p>
-              ))}
+              <div className="mt-2 space-y-0.5">
+                {COMPANY.address.map((line) => (
+                  <p key={line} className="text-sm leading-snug text-gray-600">
+                    {line}
+                  </p>
+                ))}
+              </div>
               <a
                 href={`tel:${COMPANY.phone.replace(/\s/g, "")}`}
-                className="block text-sm text-gray-600 transition-colors hover:text-accent"
+                className="mt-2 block text-sm leading-snug text-gray-600 transition-colors hover:text-accent"
               >
                 {COMPANY.phoneLabel}
               </a>

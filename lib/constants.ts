@@ -7,7 +7,7 @@ export const COMPANY = {
     "Enterprise technology for oil & gas and industrial operations — AI, Industrial IoT and Data Intelligence.",
   eyebrow: "Registered Petronas Vendor · MOF Malaysia Registered",
   headline:
-    "Enterprise AI, IoT and Data Intelligence for Oil & Gas Operations",
+    "Enterprise AI, IoT and Data Intelligence for Safer, Smarter Operations",
   subheadline:
     "We work with operators and asset owners to strengthen HSE performance, improve asset reliability and support field and corporate decision-making — through governed AI deployment, industrial IoT and enterprise analytics.",
   phone: "+60 3-7628 5496",

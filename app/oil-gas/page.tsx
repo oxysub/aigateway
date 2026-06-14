@@ -24,6 +24,7 @@ export const metadata: Metadata = {
     "permit to work",
     "engineering copilot",
   ],
+  alternates: { canonical: "/oil-gas" },
   openGraph: {
     title: "Oil & Gas Solutions | AI Gateway",
     description:

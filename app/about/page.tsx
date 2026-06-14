@@ -13,6 +13,7 @@ export const metadata: Metadata = {
   description:
     "AI Gateway is a 100% Bumiputra company registered with MOF Malaysia and a registered Petronas vendor, delivering enterprise AI, industrial IoT and data intelligence for oil & gas and industrial operations.",
   keywords: [...SEO_KEYWORDS, "Bumiputra company", "Ministry of Finance Malaysia"],
+  alternates: { canonical: "/about" },
   openGraph: {
     title: "About Us | AI Gateway",
     description:
