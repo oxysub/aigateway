@@ -1,5 +1,6 @@
 export const COMPANY = {
   name: "AI Gateway",
+  legalName: "AI Gateway Sdn Bhd",
   positioning:
     "Enterprise AI, IoT and Data Intelligence for Oil & Gas and Industrial Operations",
   tagline:

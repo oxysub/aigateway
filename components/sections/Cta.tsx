@@ -39,6 +39,7 @@ export function Cta({
           </div>
 
           <address className="mx-auto mt-8 max-w-md space-y-1 text-center not-italic text-sm text-muted">
+            <p className="font-medium text-foreground">{COMPANY.legalName}</p>
             {COMPANY.address.map((line) => (
               <p key={line}>{line}</p>
             ))}

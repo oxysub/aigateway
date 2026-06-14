@@ -5,7 +5,8 @@ set -euo pipefail
 export RAYON_NUM_THREADS=1
 export UV_THREADPOOL_SIZE=1
 export NEXT_WEBPACK_PARALLELISM=1
-export NODE_OPTIONS="${NODE_OPTIONS:---max-old-space-size=512}"
+export NODE_OPTIONS="${NODE_OPTIONS:---max-old-space-size=384}"
 export NEXT_TELEMETRY_DISABLED=1
+export GENERATE_SOURCEMAP=false
 
 exec npx next build --webpack

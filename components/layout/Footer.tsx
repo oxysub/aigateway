@@ -67,6 +67,9 @@ export function Footer() {
               Contact
             </h3>
             <address className="space-y-3 not-italic">
+              <p className="text-sm font-medium text-gray-900">
+                {COMPANY.legalName}
+              </p>
               {COMPANY.address.map((line) => (
                 <p key={line} className="text-sm leading-relaxed text-gray-600">
                   {line}
@@ -83,7 +86,7 @@ export function Footer() {
         </div>
 
         <div className="mt-10 border-t border-gray-200 pt-8 text-center text-sm text-gray-500">
-          &copy; {year} {COMPANY.name}. All rights reserved.
+          &copy; {year} {COMPANY.legalName}. All rights reserved.
         </div>
       </Container>
     </footer>
