@@ -29,7 +29,7 @@ REMOTE_TAR    ?= /home/oxydatam/aigateway-build.tar.gz
 TAR_FILE      ?= aigateway-build.tar.gz
 GIT_BRANCH    ?= main
 
-.PHONY: help build-tar git-push upload remote-deploy deploy deploy-fast check-ssh
+.PHONY: help build-tar git-push upload remote-deploy deploy deploy-fast check-ssh ping-sitemap
 
 help:
 	@echo "AI Gateway — FastComet deploy"
@@ -45,13 +45,16 @@ help:
 	@echo "  make git-push MSG=\"...\" Commit and push to GitHub"
 	@echo "  make upload             Build + SCP $(TAR_FILE) to FastComet"
 	@echo "  make remote-deploy      Git reset + extract .next on server (tar must exist)"
-	@echo "  make check-ssh          Test SSH connection"
+	@echo "  make ping-sitemap       Ping Google/Bing after sitemap is live"
 	@echo ""
 	@echo "After deploy: cPanel → Node.js App → RESTART → https://aigateway.my"
 
 check-ssh:
 	@echo "Testing SSH to $(SSH_TARGET) (port $(SSH_PORT))..."
 	ssh $(SSH_OPTS) $(SSH_TARGET) 'echo "SSH OK — $$(hostname)"'
+
+ping-sitemap:
+	@./scripts/ping-sitemap.sh
 
 build-tar:
 	@echo "Stopping dev server..."
