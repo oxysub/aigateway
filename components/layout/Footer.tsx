@@ -13,21 +13,21 @@ export function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="border-t border-white/10 bg-surface py-12">
+    <footer className="border-t border-gray-200 bg-white py-12">
       <Container>
         <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-4">
           <div className="lg:col-span-1">
             <Logo className="mb-4" />
-            <p className="max-w-xs text-sm leading-relaxed text-muted">
+            <p className="max-w-xs text-sm leading-relaxed text-gray-600">
               {COMPANY.tagline}
             </p>
-            <p className="mt-4 text-xs leading-relaxed text-muted/80">
+            <p className="mt-4 text-xs leading-relaxed text-gray-500">
               {CREDENTIALS.map((c) => c.label).join(" · ")}
             </p>
           </div>
 
           <div>
-            <h3 className="mb-4 text-xs font-semibold uppercase tracking-wider text-foreground/70">
+            <h3 className="mb-4 text-xs font-semibold uppercase tracking-wider text-gray-500">
               Navigation
             </h3>
             <ul className="space-y-2">
@@ -35,7 +35,7 @@ export function Footer() {
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="text-sm text-muted transition-colors hover:text-foreground"
+                    className="text-sm text-gray-600 transition-colors hover:text-gray-900"
                   >
                     {link.label}
                   </Link>
@@ -45,7 +45,7 @@ export function Footer() {
           </div>
 
           <div>
-            <h3 className="mb-4 text-xs font-semibold uppercase tracking-wider text-foreground/70">
+            <h3 className="mb-4 text-xs font-semibold uppercase tracking-wider text-gray-500">
               Solutions
             </h3>
             <ul className="space-y-2">
@@ -53,7 +53,7 @@ export function Footer() {
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="text-sm text-muted transition-colors hover:text-foreground"
+                    className="text-sm text-gray-600 transition-colors hover:text-gray-900"
                   >
                     {link.label}
                   </Link>
@@ -63,18 +63,18 @@ export function Footer() {
           </div>
 
           <div>
-            <h3 className="mb-4 text-xs font-semibold uppercase tracking-wider text-foreground/70">
+            <h3 className="mb-4 text-xs font-semibold uppercase tracking-wider text-gray-500">
               Contact
             </h3>
             <address className="space-y-3 not-italic">
               {COMPANY.address.map((line) => (
-                <p key={line} className="text-sm leading-relaxed text-muted">
+                <p key={line} className="text-sm leading-relaxed text-gray-600">
                   {line}
                 </p>
               ))}
               <a
                 href={`tel:${COMPANY.phone.replace(/\s/g, "")}`}
-                className="block text-sm text-muted transition-colors hover:text-foreground"
+                className="block text-sm text-gray-600 transition-colors hover:text-accent"
               >
                 {COMPANY.phoneLabel}
               </a>
@@ -82,7 +82,7 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-10 border-t border-white/10 pt-8 text-center text-sm text-muted">
+        <div className="mt-10 border-t border-gray-200 pt-8 text-center text-sm text-gray-500">
           &copy; {year} {COMPANY.name}. All rights reserved.
         </div>
       </Container>
