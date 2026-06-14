@@ -3,7 +3,6 @@
 import { useState } from "react";
 import Link from "next/link";
 import { Container } from "@/components/ui/Container";
-import { Button } from "@/components/ui/Button";
 import { Logo } from "@/components/ui/Logo";
 import { NAV_LINKS } from "@/lib/constants";
 
@@ -28,34 +27,24 @@ export function Header() {
             ))}
           </div>
 
-          <div className="flex items-center gap-3">
-            <Button
-              href="/#contact"
-              variant="primary"
-              className="hidden sm:inline-flex"
-            >
-              Contact Us
-            </Button>
-
-            <button
-              type="button"
-              className="inline-flex items-center justify-center rounded-lg border border-gray-200 p-2 text-gray-600 transition-colors hover:border-accent/40 hover:text-gray-900 xl:hidden"
-              aria-expanded={mobileOpen}
-              aria-controls="mobile-nav"
-              aria-label={mobileOpen ? "Close menu" : "Open menu"}
-              onClick={() => setMobileOpen((open) => !open)}
-            >
-              {mobileOpen ? (
-                <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M6 18 18 6M6 6l12 12" />
-                </svg>
-              ) : (
-                <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 9h16.5m-16.5 6.75h16.5" />
-                </svg>
-              )}
-            </button>
-          </div>
+          <button
+            type="button"
+            className="inline-flex items-center justify-center rounded-lg border border-gray-200 p-2 text-gray-600 transition-colors hover:border-accent/40 hover:text-gray-900 xl:hidden"
+            aria-expanded={mobileOpen}
+            aria-controls="mobile-nav"
+            aria-label={mobileOpen ? "Close menu" : "Open menu"}
+            onClick={() => setMobileOpen((open) => !open)}
+          >
+            {mobileOpen ? (
+              <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M6 18 18 6M6 6l12 12" />
+              </svg>
+            ) : (
+              <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 9h16.5m-16.5 6.75h16.5" />
+              </svg>
+            )}
+          </button>
         </nav>
       </Container>
 
@@ -75,16 +64,6 @@ export function Header() {
                 {link.label}
               </Link>
             ))}
-            <div className="mt-2 border-t border-gray-200 pt-2">
-              <Button
-                href="/#contact"
-                variant="primary"
-                className="w-full"
-                onClick={() => setMobileOpen(false)}
-              >
-                Contact Us
-              </Button>
-            </div>
           </Container>
         </div>
       )}

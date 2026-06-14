@@ -101,7 +101,43 @@ Then **Restart** the Node.js app in cPanel (regenerates full `.htaccess`).
 
 ## Routine deploy (code or UI changes)
 
-### 1. On Mac — commit, push, build
+### Option A — Makefile (recommended on Mac)
+
+**One-time setup:**
+
+```bash
+cp .env.deploy.example .env.deploy
+# Edit SSH_TARGET in .env.deploy (your FastComet SSH login, e.g. oxydatam@s11748)
+make check-ssh
+```
+
+**Full deploy (git + build + upload + extract):**
+
+```bash
+make deploy MSG="Describe your change"
+```
+
+**Deploy without git** (code already pushed):
+
+```bash
+make deploy-fast
+```
+
+**Individual steps:**
+
+```bash
+make build-tar          # build aigateway-build.tar.gz
+make git-push MSG="..." # commit + push
+make upload             # build + scp to server
+make remote-deploy      # git reset + extract on server
+```
+
+Then **cPanel → Node.js App → RESTART**.
+
+---
+
+### Option B — Manual steps
+
 
 ```bash
 cd /Users/subrasuppiah/Desktop/oxysub/aigateway
